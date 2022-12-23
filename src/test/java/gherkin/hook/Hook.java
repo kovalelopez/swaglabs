@@ -7,6 +7,7 @@ import io.cucumber.java.Scenario;
 
 import static driver.Drivers.getDriver;
 import static driver.Drivers.testScenario;
+import static report.Report.appendToReport;
 
 public class Hook {
 
@@ -21,6 +22,9 @@ public class Hook {
 
     @After
     public void tearDown() {
+        if (testScenario.get().isFailed()) {
+            appendToReport();
+        }
         getDriver().quit();
     }
 

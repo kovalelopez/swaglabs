@@ -1,56 +1,41 @@
 package gherkin.stepdefinition;
 
-
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.By;
+import pageobjects.CalculoPO;
 import pageobjects.HomePO;
-import pageobjects.NetSalaryPO;
-import pageobjects.ResultSalaryPO;
+import pageobjects.ResultadoPO;
 
-import static driver.Drivers.getDriver;
+import static utils.Utils.getElement;
+import static utils.Utils.isElementPresent;
 
 public class Steps {
 
-    NetSalaryPO netSalary;
-    ResultSalaryPO resultSalaryPO;
-    HomePO home;
+    HomePO homePO;
+    CalculoPO calculoPO;
+    ResultadoPO resultadoPO;
 
-    @Given("eu acessei o site da Calculadora de salario liquido")
-    public void eu_acessei_o_site_da_calculadora_de_salario_liquido() throws InterruptedException {
-        netSalary = new NetSalaryPO(getDriver());
-        resultSalaryPO = new ResultSalaryPO(getDriver());
-        home = new HomePO(getDriver());
-        home.getLaborCalculation("Ferramentas",
-                "Calculadoras trabalhistas",
-                "Salário Líquido");
-    }
-
-    @When("preencho o salario {string}")
-    public void preencho_o_salario(String salary) {
-        netSalary.setSalary(salary);
-    }
-    @When("preencho os descontos {string}")
-    public void preencho_os_descontos(String discounts) {
-        netSalary.setDiscounts(discounts);
-    }
-    @When("preencho o numero de dependentes {string}")
-    public void preencho_o_numero_de_dependentes(String dependents) {
-        netSalary.setDependents(dependents);
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    @When("efetuo o calculo")
-    public void efetuo_o_calculo() {
-        netSalary.btnCalculate();
+    @Given("eu acessei o site da Calculadora de decimo terceiro")
+    public void eu_acessei_o_site_da_calculadora_de_decimo_terceiro() throws InterruptedException {
+        homePO = new HomePO();
+        calculoPO = new CalculoPO();
+        resultadoPO = new ResultadoPO();
+        homePO.getLaborCalculation("Ferramentas",
+                "Calculadoras trabalhistas", "Décimo Terceiro");
+        calculoPO.validateCalculationPage();
     }
 
-    @Then("eu tenho o valor {string} do salario liquido")
-    public void eu_tenho_o_valor_do_salario_liquido(String netSalary) {
-        resultSalaryPO.validateNetSalary(netSalary);
+    @When("os dados salariais, {string}, {string}, {string}, {string}")
+    public void os_dados_salariais(String salary, String dependents,
+                                   String months, String installment) {
+        calculoPO.sendForm(salary, dependents, months, installment);
+    }
+    @Then("eu tenho o valor {string} do decimo terceiro")
+    public void eu_tenho_o_valor_do_decimo_terceiro(String liquidSalary) {
+        resultadoPO.validateResultPage();
+        resultadoPO.validateLiquidSalary(liquidSalary);
     }
 
 }
