@@ -24,9 +24,9 @@ public class NoCredentialsLoginSteps {
 
     }
 
-    @Then("I see the message {string}")
-    public void i_see_the_message(String message) {
-        loginPO.validateLoginWithoutCredentials(message);
-
-    }
+//    @Then("I see the message {string}")
+//    public void i_see_the_message(String message) {
+//        loginPO.validateLoginWithoutCredentials(message);
+//
+//    }
 }

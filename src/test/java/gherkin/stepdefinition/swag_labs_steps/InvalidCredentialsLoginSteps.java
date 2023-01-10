@@ -14,9 +14,9 @@ public class InvalidCredentialsLoginSteps {
         loginPO.insertUserName("big chester");
         loginPO.loginBtn();
     }
-    @Then("I see a new message {string}")
-    public void i_see_a_new_message(String message) {
-       loginPO.validateLoginWithInvalidCredentials(message);
-    }
+//    @Then("I see a new message {string}")
+//    public void i_see_a_new_message(String message) {
+//       loginPO.validateLoginWithInvalidCredentials(message);
+//    }
 
 }

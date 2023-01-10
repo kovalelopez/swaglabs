@@ -27,29 +27,56 @@ public class LoginPO {
         elementClick(By.id("login-button"));
     }
 
-    public void validateLogin() {
-        Assert.assertTrue(getElement(By.className("title")).isDisplayed(),
-                "Login não foi efetuado");
+    public void login(String username, String password) {
+        insertUserName(username);
+        insertPassword(password);
+        loginBtn();
     }
 
+    public void validateLogin(String message) {
+        Assert.assertTrue(getElement(By.className("title")).getText().
+                        toLowerCase().contains(message.toLowerCase()),
+                "Login não foi efetuado");
+    }
     public void validateLoginWithoutCredentials(String message) {
         WebElement errorMessage = getElement(By.cssSelector("#login_button_container > div > form" +
                 " > div.error-message-container.error > h3"));
         Assert.assertTrue(errorMessage.getText().contains(message));
     }
-
     public void validateLoginWithoutPassword(String message) {
         WebElement errorMessage = getElement(By.cssSelector("#login_button_container > div > form" +
                 " > div.error-message-container.error > h3"));
         Assert.assertTrue(errorMessage.getText().contains(message),
                 "Erro: a mensagem de login sem senha está diferente");
     }
-
     public void validateLoginWithInvalidCredentials(String message) {
         WebElement errorMessage = getElement(By.cssSelector("#login_button_container > div > form" +
                 " > div.error-message-container.error > h3"));
         Assert.assertTrue(errorMessage.getText().contains(message),
                 "Erro: a mensagem de login com credenciais inválidas está diferente");
+    }
+    public void validateLoginLockedUser(String message) {
+        WebElement errorMessage = getElement(By.cssSelector("#login_button_container > div > form" +
+                " > div.error-message-container.error > h3"));
+        Assert.assertTrue(errorMessage.getText().contains(message),
+                "Erro: a mensagem de login com credenciais inválidas está diferente");
+    }
+
+    public void validateLoginSwagLabs(String username, String password, String message) {
+        appendToReport();
+        if (username.isEmpty() && password.isEmpty()) {
+            validateLoginWithoutCredentials(message);
+        } else if (!username.isEmpty() && password.isEmpty()) {
+            validateLoginWithoutPassword(message);
+        } else if (!username.isEmpty() && !password.isEmpty()) {
+            if (isElementPresent(By.cssSelector("#header_container > div.header_secondary_container > span"))) {
+                validateLogin(message);
+            } else if (username.contains("locked_out_user")) {
+                validateLoginLockedUser(message);
+            } else {
+                validateLoginWithInvalidCredentials(message);
+            }
+        }
     }
 
 }

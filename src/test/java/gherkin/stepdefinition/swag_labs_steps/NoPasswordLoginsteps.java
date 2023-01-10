@@ -22,9 +22,9 @@ public class NoPasswordLoginsteps {
     public void i_click_the_login_button() {
         loginPO.loginBtn();
     }
-    @Then("I see a message {string}")
-    public void i_see_a_message(String message) {
-        loginPO.validateLoginWithoutPassword(message);
-    }
+//    @Then("I see a message {string}")
+//    public void i_see_a_message(String message) {
+//        loginPO.validateLoginWithoutPassword(message);
+//    }
 
 }

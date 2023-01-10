@@ -9,20 +9,16 @@ public class LoginSteps {
 
     LoginPO loginPO;
 
-    @Given("I accessed the swag labs site")
-    public void i_accessed_the_swag_labs_site() {
-        loginPO = new LoginPO();
-        loginPO.validateLoginPage();
-    }
+
     @When("I make login")
     public void i_make_login() {
         loginPO.insertUserName("standard_user");
         loginPO.insertPassword("secret_sauce");
         loginPO.loginBtn();
     }
-    @Then("I see the swag labs logo")
-    public void i_see_the_swag_labs_logo() {
-       loginPO.validateLogin();
-    }
+//    @Then("I see the swag labs logo")
+//    public void i_see_the_swag_labs_logo() {
+//       loginPO.validateLogin();
+//    }
 
 }
