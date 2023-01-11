@@ -1,7 +1,10 @@
 package pageobjects.swag_labs;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+
+import java.util.List;
 
 import static driver.Drivers.getDriver;
 import static report.Report.appendToReport;
@@ -30,5 +33,27 @@ public class ProductsPO {
         Assert.assertEquals(size,countProducts(),"A quantidade foi diferente");
     }
 
+    public WebElement getProduct(String product) {
+        List<WebElement> products = getDriver().findElements(By.className("inventory_item"));
+        WebElement item = null;
+        for (WebElement p:products
+             ) {
+            if (p.getText().contains(product)) {
+                item = p;
+                break;
+            }
+        }
+        return item;
+    }
+
+    public String getPrice(String product) {
+        WebElement item = getProduct(product);
+        return item.findElement(By.className("inventory_item_price")).getText();
+    }
+
+    public void validatePriceProduct(String price, String product) {
+        appendToReportElementHighlight(getProduct(product));
+        Assert.assertTrue(getPrice(product).contains(price), "Os preços estão divergentes");
+    }
     
 }
