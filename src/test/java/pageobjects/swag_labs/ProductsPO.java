@@ -33,8 +33,15 @@ public class ProductsPO {
         Assert.assertEquals(size,countProducts(),"A quantidade foi diferente");
     }
 
+    /**
+     * @param product - é o produto que será capturado e verificado o valor
+     *                Carrego uma lista com os produtos da classe inventory_item
+     *                Percorro a lista buscando o nome do produto nos elementos da lista
+     *                Eu atribuo o elemento a um WebElement quando o título for correspodente
+     * */
     public WebElement getProduct(String product) {
-        List<WebElement> products = getDriver().findElements(By.className("inventory_item"));
+        WebElement list = getElement(By.className("inventory_list"));
+        List<WebElement> products = list.findElements(By.className("inventory_item"));
         WebElement item = null;
         for (WebElement p:products
              ) {
@@ -46,14 +53,28 @@ public class ProductsPO {
         return item;
     }
 
+    /**
+     * @param product - produto que deve ser capturado o preço
+     *                Chamo o método getProduct que retorna elemento produto
+     *                Dentro do elemento é realizado um findElement() na classe inventory_item_price
+     *                O valor do preço é atribuído a uma String price e retornado
+     * */
     public String getPrice(String product) {
         WebElement item = getProduct(product);
-        return item.findElement(By.className("inventory_item_price")).getText();
+        String price = item.findElement(By.className("inventory_item_price")).getText();
+        return price;
     }
 
+    /**
+     * @param product
+     * @param price - preço a ser comparado que foi informado na feature
+     *              Chamo o método que retorna o preço de um elemento
+     *              A validação preço capturado no produto é comparada com o preço passado por parâmetro
+     * */
     public void validatePriceProduct(String price, String product) {
         appendToReportElementHighlight(getProduct(product));
-        Assert.assertTrue(getPrice(product).contains(price), "Os preços estão divergentes");
+        String productPrice = getPrice(product);
+        Assert.assertTrue(productPrice.contains(price), "Os preços estão divergentes");
     }
     
 }

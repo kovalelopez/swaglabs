@@ -1,7 +1,9 @@
 package gherkin.stepdefinition.swag_labs_steps;
 
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pageobjects.swag_labs.LoginPO;
 import pageobjects.swag_labs.ProductsPO;
 
 public class ProductSteps {
@@ -19,7 +21,11 @@ public class ProductSteps {
         productsPO = new ProductsPO();
         productsPO.validateProductsQuantity(6);
     }
-
+    @Given("I am logged in swag labs with username {string} and password {string}")
+    public void i_am_logged_in_swag_labs_with_username_and_password(String username, String password) {
+        LoginPO loginPO = new LoginPO();
+        loginPO.login(username, password);
+    }
     String product;
     @When("Select the product {string}")
     public void select_the_product(String product) {

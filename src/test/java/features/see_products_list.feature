@@ -14,7 +14,7 @@ Feature: Products list
       Then Validate the quantity of products
 
     Scenario: Validate price product
-      When I make login with username "standard_user" and password "secret_sauce"
-      And Select the product "Sauce Labs Backpack"
+      Given I am logged in swag labs with username "standard_user" and password "secret_sauce"
+      When Select the product "Sauce Labs Backpack"
       And I get the price
       Then Validate the price is correct "29.99"

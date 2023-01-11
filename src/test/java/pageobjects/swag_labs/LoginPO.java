@@ -79,6 +79,11 @@ public class LoginPO {
         }
     }
 
+    public void validatedLogin(String username, String password, String message) {
+        login(username, password);
+        validateLoginSwagLabs(username, password, message);
+    }
+
 }
 
 
