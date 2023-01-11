@@ -8,3 +8,13 @@ Feature: Products list
       Examples:
       |username         |password      |
       |"standard_user"  |"secret_sauce"|
+
+    Scenario: count products list
+      When I make login with username "standard_user" and password "secret_sauce"
+      Then Validate the quantity of products
+
+    Scenario: Validate price product
+      When I make login with username "standard_user" and password "secret_sauce"
+      And Select the product "Sauce Labs Backpack"
+      And I get the price
+      Then Validate the price is correct "29.99"

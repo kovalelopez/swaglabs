@@ -13,4 +13,10 @@ public class ProductSteps {
         productsPO.validateList();
     }
 
+    @Then("Validate the quantity of products")
+    public void validate_the_quantity_of_products() {
+        productsPO = new ProductsPO();
+        productsPO.validateProductsQuantity(6);
+    }
+
 }
