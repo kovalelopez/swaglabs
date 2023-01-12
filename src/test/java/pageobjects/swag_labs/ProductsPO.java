@@ -10,6 +10,7 @@ import static driver.Drivers.getDriver;
 import static report.Report.appendToReport;
 import static report.Report.appendToReportElementHighlight;
 import static utils.Utils.getElement;
+import static utils.Utils.sleep;
 
 public class ProductsPO {
 
@@ -76,5 +77,13 @@ public class ProductsPO {
         String productPrice = getPrice(product);
         Assert.assertTrue(productPrice.contains(price), "Os preços estão divergentes");
     }
-    
+    public void addProduct(String product){
+        getProduct(product).findElement(By.tagName("button")).click();
+    }
+    public void validateAddCartText(String product, String text){
+        sleep(2);
+        String textProduct = getProduct(product).findElement(By.tagName("button")).getText();
+        appendToReportElementHighlight(getProduct(product).findElement(By.tagName("button")));
+        Assert.assertEquals(text, textProduct);
+    }
 }

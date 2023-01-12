@@ -30,6 +30,7 @@ public class LoginPO {
     public void login(String username, String password) {
         insertUserName(username);
         insertPassword(password);
+        appendToReport();
         loginBtn();
     }
 

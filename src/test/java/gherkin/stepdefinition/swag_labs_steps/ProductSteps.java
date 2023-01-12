@@ -42,4 +42,17 @@ public class ProductSteps {
         productsPO.validatePriceProduct(price, this.product);
     }
 
+
+    @When("I add the product in the cart")
+    public void i_add_the_product_in_the_cart() {
+        productsPO.addProduct(this.product);
+    }
+    @Then("I see the text {string} in the button")
+    public void i_see_the_text_in_the_button(String text) {
+        productsPO.validateAddCartText(this.product, text);
+    }
+    @Then("I see the product in the cart")
+    public void i_see_the_product_in_the_cart() {
+    }
+
 }
