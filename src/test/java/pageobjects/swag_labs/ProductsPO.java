@@ -9,8 +9,7 @@ import java.util.List;
 import static driver.Drivers.getDriver;
 import static report.Report.appendToReport;
 import static report.Report.appendToReportElementHighlight;
-import static utils.Utils.getElement;
-import static utils.Utils.sleep;
+import static utils.Utils.*;
 
 public class ProductsPO {
 
@@ -86,4 +85,9 @@ public class ProductsPO {
         appendToReportElementHighlight(getProduct(product).findElement(By.tagName("button")));
         Assert.assertEquals(text, textProduct);
     }
+
+    public void accessCart() {
+        elementClick(By.id("shopping_cart_container"));
+    }
+
 }

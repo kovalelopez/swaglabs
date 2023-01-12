@@ -3,6 +3,7 @@ package gherkin.stepdefinition.swag_labs_steps;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import pageobjects.swag_labs.CartPO;
 import pageobjects.swag_labs.LoginPO;
 import pageobjects.swag_labs.ProductsPO;
 
@@ -51,8 +52,17 @@ public class ProductSteps {
     public void i_see_the_text_in_the_button(String text) {
         productsPO.validateAddCartText(this.product, text);
     }
+
+    CartPO cartPO;
+    @When("I click in the cart")
+    public void i_click_in_the_cart() {
+        cartPO = new CartPO();
+        productsPO.accessCart();
+        cartPO.validateCartPage();
+    }
     @Then("I see the product in the cart")
     public void i_see_the_product_in_the_cart() {
+        cartPO.validateProductCart(this.product);
     }
 
 }

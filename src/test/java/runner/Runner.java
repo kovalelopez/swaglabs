@@ -9,7 +9,7 @@ import org.junit.runner.RunWith;
         glue = {"gherkin"},
         plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
                 "json:target/cucumber-report.json"},
-        dryRun = true
+        dryRun = false
 )
 public class Runner {
 
