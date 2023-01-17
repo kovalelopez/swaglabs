@@ -17,6 +17,7 @@ public class AppWeb {
     public void initChrome() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
+        driver.manage().deleteAllCookies();
         setDriver(driver);
     }
 

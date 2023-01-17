@@ -15,7 +15,6 @@ Feature: Product tests
     |"Sauce Labs Onesie"       |
     |"Sauce Labs T-Shirt (Red)"|
 
-  @nameProduct
   Scenario Outline: validate name product
     When I access the product page <product>
     Then I see the product name
