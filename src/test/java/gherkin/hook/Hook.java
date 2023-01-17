@@ -15,7 +15,6 @@ public class Hook {
     public void init(Scenario scenario) {
         AppWeb appWeb = new AppWeb();
         appWeb.setUpDriver();
-        getDriver().manage().window().maximize();
         getDriver().get("https://www.saucedemo.com/");
         testScenario.set(scenario);
     }

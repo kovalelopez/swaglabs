@@ -5,6 +5,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import pageobjects.swag_labs.CartPO;
 import pageobjects.swag_labs.LoginPO;
+import pageobjects.swag_labs.ProductDescriptionPO;
 import pageobjects.swag_labs.ProductsPO;
 
 public class ProductSteps {
@@ -46,7 +47,7 @@ public class ProductSteps {
 
     @When("I add the product in the cart")
     public void i_add_the_product_in_the_cart() {
-        productsPO.addProduct(this.product);
+        productsPO.addProduct();
     }
     @Then("I see the text {string} in the button")
     public void i_see_the_text_in_the_button(String text) {
@@ -63,6 +64,25 @@ public class ProductSteps {
     @Then("I see the product in the cart")
     public void i_see_the_product_in_the_cart() {
         cartPO.validateProductCart(this.product);
+    }
+
+    @When("I access the product page {string}")
+    public void i_access_the_product_page(String product) {
+        productsPO = new ProductsPO();
+        this.product = product;
+        productsPO.accessProductDescription(this.product);
+    }
+
+    @When("I click in button add to cart")
+    public void i_click_in_button_add_to_cart() {
+        productsPO.addProduct();
+    }
+
+    ProductDescriptionPO productDescriptionPO;
+    @Then("I see the product name")
+    public void i_see_the_product_name() {
+        productDescriptionPO = new ProductDescriptionPO();
+        productDescriptionPO.validateProductName(this.product);
     }
 
 }

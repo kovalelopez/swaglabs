@@ -50,6 +50,11 @@ public class ProductsPO {
                 break;
             }
         }
+        /*
+        * Caso o produto não seja encontrado, o WebElement permanecerá nulo. Dessa forma,
+        * a execução será interrompida por meio da instrução abaixo.
+        * */
+        Assert.assertNotNull(item, "O produto " +product+ " não foi encontrado");
         return item;
     }
 
@@ -76,8 +81,8 @@ public class ProductsPO {
         String productPrice = getPrice(product);
         Assert.assertTrue(productPrice.contains(price), "Os preços estão divergentes");
     }
-    public void addProduct(String product){
-        getProduct(product).findElement(By.tagName("button")).click();
+    public void addProduct(){
+        elementClick(By.xpath("//*[contains(text(),'Add to cart')]"));
     }
     public void validateAddCartText(String product, String text){
         sleep(2);
@@ -90,4 +95,14 @@ public class ProductsPO {
         elementClick(By.id("shopping_cart_container"));
     }
 
+    public WebElement getProductComponent(String product, By by) {
+        WebElement productComponent = getProduct(product).findElement(by);
+        return productComponent;
+    }
+    public void accessProductDescription(String product) {
+        sleep(1);
+        WebElement component = getProductComponent(product, By.className("inventory_item_name"));
+        component.click();
+        appendToReport();
+    }
 }
