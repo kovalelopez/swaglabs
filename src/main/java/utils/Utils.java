@@ -60,6 +60,11 @@ public class Utils {
         appendToReportElementHighlight(element);
     }
 
+    /**
+     * @param by - será utilizado para efetuar uma busca de um elemento
+     *           Este método retorna true ou false ao invés de gerar uma exception
+     *           quando o elemento não é encontrado
+     * */
     public static boolean isElementPresent(By by) {
         boolean isPresent = false;
         try {
@@ -70,6 +75,10 @@ public class Utils {
         }
         return isPresent;
     }
+
+    /**
+     * @param seconds - quantidade de segundos que a automação será congelada
+     * */
     public static void sleep(int seconds){
         try {
             Thread.sleep(seconds*1000);
@@ -78,10 +87,19 @@ public class Utils {
         }
     }
 
+    /**
+     * @param text - texto que será utilizado como parâmetro no contains do xpath
+     *             Este método retorna o BY que será utilizado no método findElement()
+     *             ou findElements()
+     * */
     public static By xpathContains(String text) {
         return By.xpath("//*[contains(text(),'" +text+"')]");
     }
 
+    /**
+     * @param value - valor do tipo String que será convertido para ponto flutuante (float)
+     * @return retorna o valor convertido para float
+     * */
     public static Float castToFloat(String value) {
         return Float.parseFloat(value);
     }

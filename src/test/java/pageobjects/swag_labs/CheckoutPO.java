@@ -28,7 +28,11 @@ public class CheckoutPO {
         Float sumPrices = 0.00f;
         for (String price:prices
              ) {
-            sumPrices = sumPrices + castToFloat(price.replace("$", ""));
+            /*
+            * Removo o $ da String price
+            * */
+            price = price.replace("$", "");
+            sumPrices = sumPrices + castToFloat(price);
         }
         Assert.assertTrue(getTotalPrice().contains(sumPrices.toString()),
                 "Total price is different");
