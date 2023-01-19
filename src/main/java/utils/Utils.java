@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
 import java.time.Duration;
+import java.util.List;
 
 import static driver.Drivers.getDriver;
 import static report.Report.appendToReportElementHighlight;
@@ -21,6 +22,11 @@ public class Utils {
         WebElement element = new WebDriverWait(getDriver(), Duration.ofSeconds(10))
                 .until(ExpectedConditions.elementToBeClickable(by));
         return element;
+    }
+
+    public static List<WebElement> getElements(WebElement father, By by) {
+        List<WebElement> list = father.findElements(by);
+        return list;
     }
 
     public static void elementClick(By by) {
@@ -71,4 +77,13 @@ public class Utils {
             throw new RuntimeException(e);
         }
     }
+
+    public static By xpathContains(String text) {
+        return By.xpath("//*[contains(text(),'" +text+"')]");
+    }
+
+    public static Float castToFloat(String value) {
+        return Float.parseFloat(value);
+    }
+
 }

@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static driver.Drivers.getDriver;
@@ -70,6 +71,15 @@ public class ProductsPO {
         return price;
     }
 
+    public List<String> getPrices(List<String> products) {
+        List<String> prices = new ArrayList<>();
+        for (String product:products
+             ) {
+            prices.add(getPrice(product));
+        }
+        return prices;
+    }
+
     /**
      * @param product
      * @param price - preço a ser comparado que foi informado na feature
@@ -83,6 +93,13 @@ public class ProductsPO {
     }
     public void addProduct(){
         elementClick(By.xpath("//*[contains(text(),'Add to cart')]"));
+    }
+    public void addProducts(List<String> products) {
+        for (String product:products
+        ) {
+            WebElement p = getProduct(product);
+            p.findElement(By.tagName("button")).click();
+        }
     }
     public void validateAddCartText(String product, String text){
         sleep(2);

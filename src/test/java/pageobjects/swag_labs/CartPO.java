@@ -9,8 +9,7 @@ import java.util.List;
 import static driver.Drivers.getDriver;
 import static report.Report.appendToReport;
 import static report.Report.appendToReportElementHighlight;
-import static utils.Utils.getElement;
-import static utils.Utils.validatePage;
+import static utils.Utils.*;
 
 public class CartPO {
 
@@ -39,6 +38,22 @@ public class CartPO {
     public void validateProductCart(String product) {
         appendToReportElementHighlight(getProductCart(product));
         Assert.assertNotNull(getProductCart(product), "O produto não foi adicionado no carrinho");
+    }
+
+    public void validateCartProducts(List<String> products) {
+        for (String product:products
+        ) {
+            validateProductCart(product);
+        }
+    }
+
+    public void accessCheckoutPage() {
+        elementClick(By.id("checkout"));
+    }
+
+    public void validateProductsAndCheckout(List<String> products) {
+        validateCartProducts(products);
+        accessCheckoutPage();
     }
 
 }

@@ -8,6 +8,8 @@ import pageobjects.swag_labs.LoginPO;
 import pageobjects.swag_labs.ProductDescriptionPO;
 import pageobjects.swag_labs.ProductsPO;
 
+import static utils.Utils.sleep;
+
 public class ProductSteps {
 
     ProductsPO productsPO;
